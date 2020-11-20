@@ -1,10 +1,13 @@
 import pandas as pd
-import quandl, math
+import quandl, math, datetime
 import numpy as np
 from sklearn.model_selection import cross_validate, train_test_split
 from sklearn import preprocessing, svm
 from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+from matplotlib import style
 
+style.use('ggplot')
 
 df = quandl.get("EOD/HD", authtoken="wq2asyVGTsYhXv66xkp4") # get data set
 
@@ -22,22 +25,48 @@ df.fillna(-99999, inplace = True) # remove NAs
 forecast_out = int( math.ceil(0.01 * len(df)) ) # length of forcast  1% of data frame for now, it can change
 
 df['label'] = df[forecast_col].shift(-forecast_out) # shift Adj_Close -10 for now 
-df.dropna(inplace = True)
 
-# Features are X
-X = np.array(df.drop(['label'], 1))
-# Labels are y
-y = np.array(df['label'])   
 
+X = np.array(df.drop(['label'], 1))# Features are X
 X = preprocessing.scale(X) # scale X for making it faster and easier
+X_lately = X[ -forecast_out : ] # forecast set
+X = X[ : -forecast_out : ]
+
+df.dropna(inplace = True) # clear NAs
+
+y = np.array(df['label']) # Labels are y
 
 X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.4 ) # set train data and test data
 
-clf = LinearRegression() # use LinearRegression
+clf = LinearRegression(n_jobs=-1) # use LinearRegression, n_jobs how mony thread it will use -1 means as mush as possible
 
 clf.fit(X_train, y_train) # train the classifier
 
 accuracy =  clf.score(X_test, y_test) # test the classifier and get accuracy
 
+forecast_set = clf.predict(X_lately)
 
-print(accuracy)
+print(forecast_set, accuracy, forecast_out)
+
+df['Forecast'] = np.nan
+
+last_date = df.iloc[-1].name
+last_unix = last_date.timestamp()
+one_day = 86400
+next_unix = last_unix + one_day
+print( datetime.datetime.fromtimestamp(next_unix) )
+
+for i in forecast_set:
+    next_date = datetime.datetime.fromtimestamp(next_unix)
+    next_unix += one_day
+    df.loc[next_date] = [np.nan for _ in range(len(df.columns) - 1)] + [i]
+
+df['Adj_Close'].plot()
+df['Forecast'].plot()
+plt.legend(loc = 4)
+plt.xlabel('Date')
+plt.ylabel('Price')
+plt.show()
+
+print(df.tail())
+
