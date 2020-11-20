@@ -6,6 +6,7 @@ from sklearn import preprocessing, svm
 from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 from matplotlib import style
+import pickle
 
 style.use('ggplot')
 
@@ -36,9 +37,18 @@ y = np.array(df['label']) # Labels are y
 
 X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.4 ) # set train data and test data
 
-clf = LinearRegression(n_jobs=-1) # use LinearRegression, n_jobs how many thread it will use -1 means as mush as possible
+#clf = LinearRegression(n_jobs=-1) # use LinearRegression, n_jobs how many thread it will use -1 means as mush as possible
 
-clf.fit(X_train, y_train) # train the classifier
+#clf.fit(X_train, y_train) # train the classifier
+
+######## pickle classifier
+
+#with open('Regression\linearregression.pickle', 'wb') as f:
+#    pickle.dump(clf, f)
+pickle_in = open('Regression\linearregression.pickle', 'rb')
+clf = pickle.load(pickle_in)
+
+
 
 accuracy =  clf.score(X_test, y_test) # test the classifier and get accuracy
 
