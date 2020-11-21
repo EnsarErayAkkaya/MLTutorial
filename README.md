@@ -1,1 +1,8 @@
-This is a playground and learning area for Machine Laerning area.
+#ML Tutorials
+Welcome to ML tutorial
+
+##Regression
+  ####First steps.
+  In regression what we need to do is finding best slope for given linear data set. So how can we find it?
+  If we think data as x and y data like in the image,
+  
