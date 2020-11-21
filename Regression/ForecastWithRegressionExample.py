@@ -30,9 +30,9 @@ df['label'] = df[forecast_col].shift(-forecast_out) # shift Adj_Close -10 for no
 X = np.array(df.drop(['label'], 1)) # Features are X
 X = preprocessing.scale(X) # scale X for making it faster and easier
 X_lately = X[ -forecast_out : ] # forecast set
-df.dropna(inplace = True) # clear NAs
-X = X[ : -forecast_out : ]
 
+X = X[ : -forecast_out]
+df.dropna(inplace = True) # clear NAs
 y = np.array(df['label']) # Labels are y
 
 X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.4 ) # set train data and test data
