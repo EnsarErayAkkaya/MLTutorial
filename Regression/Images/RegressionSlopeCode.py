@@ -26,7 +26,8 @@ predict_y = (m * predict_x)+b
 
 plt.scatter(xs,ys)
 plt.scatter(predict_x,predict_y, c='g')
-plt.plot(xs, regression_line)
+#plt.plot(xs, regression_line)
+plt.xlabel('X-Axis')
+plt.ylabel('Y-Axis')
 plt.show()
-
 #print(m, b)
