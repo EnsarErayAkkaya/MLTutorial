@@ -31,11 +31,11 @@ def best_fit_slope_and_intercept(xs, ys): # calculate best fit slope and Y inter
 
     return m, b
 
-def squared_error(ys_orig, ys_line): # calculate squared error distance between line and point
+def squared_error(ys_orig, ys_line): # calculate squared error distance between line and points
     return sum( (ys_line - ys_orig)**2 )
 
-def coefficient_of_determination(ys_orig, ys_line): # calculate coefficient of determination, how much better our line from means of ys 
-    y_mean_line = [ mean(ys_orig) for y in ys ]
+def coefficient_of_determination(ys_orig, ys_line): # calculate coefficient of determination, how much better our line from mean line of ys 
+    y_mean_line = [ mean(ys_orig) for y in ys_orig ]
     squared_error_regr = squared_error(ys_orig, ys_line)
     squared_error_y_mean = squared_error(ys_orig, y_mean_line)
     return 1 - (squared_error_regr / squared_error_y_mean)
