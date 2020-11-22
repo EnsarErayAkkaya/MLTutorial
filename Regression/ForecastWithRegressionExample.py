@@ -48,8 +48,6 @@ X_train, X_test, y_train, y_test = train_test_split( X, y, test_size=0.4 ) # set
 pickle_in = open('Regression\linearregression.pickle', 'rb')
 clf = pickle.load(pickle_in)
 
-
-
 accuracy =  clf.score(X_test, y_test) # test the classifier and get accuracy
 
 forecast_set = clf.predict(X_lately) # predict as x_lately
