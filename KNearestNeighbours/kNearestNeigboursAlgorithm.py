@@ -18,9 +18,10 @@ def k_nearest_neighbours(data, predict, k=3):
             distances.append([euclidean_distance, group])
         
     votes = [ i[1] for i in sorted(distances)[:k] ]
-    vote_result = Counter(votes).most_common(1)[0][0]
+    vote_result = Counter(votes).most_common(1)[0][0] # get first elemet of first elemt returned list of list, mostcommont return a tuple list as [(data, count)]
+    confidence = Counter(votes).most_common(1)[0][1] / k # percent of most common element to other elements
 
-    return vote_result
+    return vote_result, confidence
 
 df = pd.read_csv(os.path.join(__location__, 'breast-cancer-wisconsin.txt')) # get file in directory
 df.replace('?', -99999, inplace = True) # int his dataset all empty values marked by '?' we cahnged to -99999 for making them unused
@@ -28,7 +29,7 @@ df.drop(['id'], 1, inplace = True) # id is irrevelant for this example so we are
 full_data = df.astype(float).values.tolist() # some data can be string so make it float to be certain 
 random.shuffle(full_data) # shuffle all data
 
-test_size = 0.2
+test_size = 0.3
 train_set = {2:[], 4:[]}
 test_set = {2:[], 4:[]}
 train_data = full_data[: -int(test_size*len(full_data))]
@@ -45,7 +46,7 @@ total = 0
 
 for group in test_set:
     for data in test_set[group]:
-        vote = k_nearest_neighbours(train_set, data, k=5)
+        vote, confidence = k_nearest_neighbours(train_set, data, k=5)
         if vote == group :
             correct += 1
         total += 1
