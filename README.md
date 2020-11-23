@@ -22,6 +22,12 @@ Welcome to ML tutorial
   When we connect our ys we calcualte with our function we will have following slope:
   ![Mean X](https://github.com/EnsarErayAkkaya/MLTutorial/blob/master/Regression/Images/RegressionSlopeX.jpg)
   
+  But **how can we sure this is a good line?** We need to use **Coefficient of determination**.
+  ![Mean X](https://github.com/EnsarErayAkkaya/MLTutorial/blob/master/Regression/Images/CoefficientOfDeterminationFormula.jpg)
+  
+  This formula will give us accuracy of line with comparison with mean of ys line with using **squared error(distance)**. As an example if squarred error of mean line of ys is 0.5   and squared error of our line is 0.1 it means that 1 - (0.1/0.5) = 0.8 and this is our accuracy.
+  
+  
 ## K Nearest Neighbours
   
   
