@@ -22,4 +22,6 @@ Welcome to ML tutorial
   When we connect our ys we calcualte with our function we will have following slope:
   ![Mean X](https://github.com/EnsarErayAkkaya/MLTutorial/blob/master/Regression/Images/RegressionSlopeX.jpg)
   
+## Regression
+  
   
