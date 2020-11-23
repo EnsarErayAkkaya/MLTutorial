@@ -17,6 +17,6 @@ Welcome to ML tutorial
   Now we need to calculate **Y intercept**, formula of intercept is 
   ![Mean X](https://github.com/EnsarErayAkkaya/MLTutorial/blob/master/Regression/Images/RegressionYIntercept.jpg)
   
-  #### Now Finally our function is ready, we can calculate every y for every is with
-   ### x y = mx + 
+  #### Now Finally our function is ready, we can calculate every y for every is with:
+   **y = mx + b ** 
   
