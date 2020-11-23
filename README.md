@@ -19,7 +19,7 @@ Welcome to ML tutorial
   
   #### Now Finally our function is ready, we can calculate every y for every is with: **y = mx + b** 
   
-  When we connect our ys we calcualte with our function we will have fallowing slope:
+  When we connect our ys we calcualte with our function we will have following slope:
   ![Mean X](https://github.com/EnsarErayAkkaya/MLTutorial/blob/master/Regression/Images/RegressionSlopeX.jpg)
   
   
