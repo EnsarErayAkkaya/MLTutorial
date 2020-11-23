@@ -18,5 +18,5 @@ Welcome to ML tutorial
   ![Mean X](https://github.com/EnsarErayAkkaya/MLTutorial/blob/master/Regression/Images/RegressionYIntercept.jpg)
   
   #### Now Finally our function is ready, we can calculate every y for every is with:
-   **y = mx + b ** 
+   **y = mx + b** 
   
