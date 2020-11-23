@@ -7,6 +7,6 @@ Welcome to ML tutorial
   
   ![example data set](https://github.com/EnsarErayAkkaya/MLTutorial/blob/master/Regression/Images/RegressionExampleDataSet.jpg)
   
-  We can calculate best slope with 
+  We can calculate best slope with following function
   
-    ![BestSlope](https://github.com/EnsarErayAkkaya/MLTutorial/blob/master/Regression/Images/RegressionMSlope.jpg)
+  ![BestSlope](https://github.com/EnsarErayAkkaya/MLTutorial/blob/master/Regression/Images/RegressionMSlope.jpg)
