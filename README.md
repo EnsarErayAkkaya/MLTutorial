@@ -2,7 +2,7 @@
 Welcome to ML tutorial
 
 ## Regression
-  In regression what we need to do is finding **best slope** for given linear data set. So how can we find the best slope?
+  In regression what we need to do is finding **Best Slope** for given linear data set. So how can we find the best slope?
   If we think data as x set and y set like in the given image,
   
   ![example data set](https://github.com/EnsarErayAkkaya/MLTutorial/blob/master/Regression/Images/RegressionExampleDataSet.jpg)
@@ -14,3 +14,6 @@ Welcome to ML tutorial
   This expression means that avarage of all Xs  
   ![Mean X]( https://github.com/EnsarErayAkkaya/MLTutorial/blob/master/Regression/Images/mean(X).jpg)
  
+  Now we need to calculate **Y intercept**, formula of intercept is 
+  ![Mean X](https://github.com/EnsarErayAkkaya/MLTutorial/blob/master/Regression/Images/RegressionYIntercept.jpg)
+  
