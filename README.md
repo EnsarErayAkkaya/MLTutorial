@@ -7,4 +7,3 @@ Welcome to ML tutorial
   If we think data as x and y data like in the image,
   
   ![ExampleDataSet](https://github.com/EnsarErayAkkaya/MLTutorial/blob/master/Regression/Images/RegressionExampleDataSet.jpg?raw=true)
-  Format: ![Alt Text](url)
