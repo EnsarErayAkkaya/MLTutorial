@@ -10,6 +10,6 @@ Welcome to ML tutorial
   We can calculate best slope with following function
   
   ![BestSlope](https://github.com/EnsarErayAkkaya/MLTutorial/blob/master/Regression/Images/RegressionMSlope.jpg)
-  
+  This expression means that mean of Xs 
   ![Mean X]( https://github.com/EnsarErayAkkaya/MLTutorial/blob/master/Regression/Images/mean(X).jpg)
  
