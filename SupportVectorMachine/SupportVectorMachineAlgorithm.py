@@ -15,7 +15,7 @@ class Support_Vector_Machine:
         self.colors = {1:'r',-1:'b'}
         if self.visualization:
             self.fig = plt.figure()
-            self.ax = self.fig.add_subplor(1,1,1)
+            self.ax = self.fig.add_subplot(1,1,1)
 
     def fit(self, data):
         self.data = data
@@ -23,8 +23,8 @@ class Support_Vector_Machine:
         opt_dict = {}
 
         transforms =   [[1, 1],
-                        [-1, 1]
-                        [-1, -1]
+                        [-1, 1],
+                        [-1, -1],
                         [1, -1]]
         all_data = []
 
@@ -37,13 +37,15 @@ class Support_Vector_Machine:
         self.min_feature_value = min(all_data)
         all_data = None
 
+        # this part cant be threaded
         step_sizes = [self.max_feature_value * 0.1,
                         self.max_feature_value * 0.01,
                         # point of expense:
-                        self.max_feature_value * 0.001,]
+                        self.max_feature_value * 0.001, # if I delete this we lose so much accuracy
+                        ]
         
-        # extremely expensive
-        b_range_multiple = 5
+        # extremely expensive!!
+        b_range_multiple = 5 
         # we dont need to take as small of steps with b as we do w
         b_multiple = 5
         latest_optimum = self.max_feature_value * 10
@@ -52,6 +54,7 @@ class Support_Vector_Machine:
             w = np.array([latest_optimum, latest_optimum])
             # we can do this beceuse convex
             optimized = False
+            # we can thread these loops
             while not optimized:
                 for b in np.arange( -1* (self.max_feature_value * b_range_multiple), self.max_feature_value * b_range_multiple, step * b_multiple ):
                     for transformation in transforms:
@@ -87,14 +90,64 @@ class Support_Vector_Machine:
     def predict(self, features):
         # sign( x.w + b )
         classification = np.sign(np.dot(np.array(features), self.w) + self.b)
-        
+        if classification != 0 and self.visualization:
+            self.ax.scatter(features[0], features[1], s=200, marker='*', c=self.colors[classification])
         return classification
+    
+    def visualize(self):
+        [[self.ax.scatter(x[0], x[1], s=100, color=self.colors[i]) for x in data_dict[i]] for i in data_dict ] 
 
+        # hyperplane = x.w+b
+        # v = x.w+b
+        # psv = 1
+        # dec = 0
+        def hyperplane(x,w,b, v):
+            return (-w[0]*x-b+v) / w[1]
+        
+        datarange = (self.min_feature_value * 0.9, self.max_feature_value*1.1)
+        hyp_x_min = datarange[0]
+        hyp_x_max = datarange[1]
+
+        # (w.x+b) = 1
+        # positive support vector hyperplane
+        psv1 = hyperplane(hyp_x_min, self.w, self.b, 1)
+        psv2 = hyperplane(hyp_x_max, self.w, self.b, 1)
+        self.ax.plot([hyp_x_min, hyp_x_max], [psv1, psv2], 'k')
+        # (w.x+b) = -1
+        # negative support vector hyperplane
+        nsv1 = hyperplane(hyp_x_min, self.w, self.b, -1)
+        nsv2 = hyperplane(hyp_x_max, self.w, self.b, -1)
+        self.ax.plot([hyp_x_min, hyp_x_max], [nsv1, nsv2], 'k')
+        # (w.x+b) = 0
+        # decision boundary vector hyperplane
+        db1 = hyperplane(hyp_x_min, self.w, self.b, 0)
+        db2 = hyperplane(hyp_x_max, self.w, self.b, 0)
+        self.ax.plot([hyp_x_min, hyp_x_max], [db1, db2], 'y--')
+
+        plt.show()
 
 
 data_dict = {   -1 : np.array([[1, 7],
                                [2, 8],
                                [3, 8]]),
-                -1 : np.array([[5, 1],
+                1 : np.array([[5, 1],
                                [6, -1],
                                [7, 3]]) }
+
+
+svm = Support_Vector_Machine()
+svm.fit(data=data_dict)
+
+predict_us = [[0,10],
+              [1,3],
+              [3,4],
+              [3,5],
+              [5,5],
+              [5,6],
+              [6,-5],
+              [5,8],]
+for p in predict_us:
+    svm.predict(p)
+
+
+svm.visualize()
